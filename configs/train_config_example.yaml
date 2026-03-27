@@ -1,0 +1,41 @@
+# Training Configuration for Crack Segmentation
+# DINOv3 Backbone + Decoder
+
+# Model Configuration
+model:
+  backbone: convnext_base
+  pretrained_weights: pretrained_checkpoint/dinov3_convnext_base_pretrain_lvd1689m-801f2ba9.pth
+
+# Training Configuration
+training:
+  image_size: 512
+  epochs: 30
+  batch_size: 12
+  num_workers: 4
+
+  # Learning Rate
+  learning_rate: 1.0e-3
+  min_lr_ratio: 0.002
+  warmup_lr_ratio: 0.01
+  warmup_epochs: 3
+
+# Dataset Configuration
+# Path is auto-constructed: datasets/{name}_{image_size}/train/images
+dataset: honeycomb_original     #数据名称， 可替换为其他训练数据集，例如 crack_v1_original
+
+# Checkpoint Configuration
+checkpoint:
+  save_dir: ./checkpoints     #模型权重储存路径
+  save_interval: 2
+  resume_from: null  # Set path to resume training, e.g., ./checkpoints/epoch-30.pth
+
+# Logging Configuration
+logging:
+  log_dir: ./logs
+  log_interval: 10
+  image_log_interval: 50
+
+# Distributed Training
+distributed:
+  addr: localhost
+  port: "8098"

@@ -1,0 +1,44 @@
+# Fine-tune on honeycomb_original_2 from a flakingpaint-trained checkpoint
+
+task_name: honeycomb_data2_512_pretrain
+
+model:
+  backbone: convnext_base
+  pretrained_weights: pretrained_checkpoint/dinov3_convnext_base_pretrain_lvd1689m-801f2ba9.pth
+
+training:
+  image_size: 512
+  epochs: 30
+  batch_size: 6
+  num_workers: 4
+
+  # Lower LR for transfer fine-tuning, then cosine decay
+  learning_rate: 3.0e-4
+  min_lr_ratio: 0.002
+  warmup_lr_ratio: 0.1
+  warmup_epochs: 3
+
+datasets:
+  train:
+    - images: datasets/honeycomb_data2_512_512/train/images
+      masks: datasets/honeycomb_data2_512_512/train/masks
+      repeat_ratio: 8
+  val:
+    - images: datasets/honeycomb_data2_512_512/val/images
+      masks: datasets/honeycomb_data2_512_512/val/masks
+      repeat_ratio: 1
+
+checkpoint:
+  save_dir: ./checkpoints/{task_name}
+  save_interval: 1
+  # Placeholder: replace with your flakingpaint trained model checkpoint
+  resume_from: ./output_checkpoints/flakingpaint-epoch-30.pth
+
+logging:
+  log_dir: ./logs/{task_name}
+  log_interval: 10
+  image_log_interval: 50
+
+distributed:
+  addr: localhost
+  port: "8102"

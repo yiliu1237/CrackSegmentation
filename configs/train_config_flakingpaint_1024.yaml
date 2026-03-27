@@ -1,0 +1,38 @@
+# Training Configuration for flakingpaint 1024 patches
+
+model:
+  backbone: convnext_base
+  pretrained_weights: pretrained_checkpoint/dinov3_convnext_base_pretrain_lvd1689m-801f2ba9.pth
+
+training:
+  image_size: 1024
+  epochs: 30
+  batch_size: 4
+  num_workers: 4
+  learning_rate: 1.0e-3
+  min_lr_ratio: 0.002
+  warmup_lr_ratio: 0.01
+  warmup_epochs: 3
+
+datasets:
+  train:
+    - images: datasets/flakingpaint_1024_1024/train/images
+      masks: datasets/flakingpaint_1024_1024/train/masks
+  val:
+    - images: datasets/flakingpaint_1024_1024/val/images
+      masks: datasets/flakingpaint_1024_1024/val/masks
+      repeat_ratio: 1
+
+checkpoint:
+  save_dir: ./checkpoints
+  save_interval: 2
+  resume_from: null
+
+logging:
+  log_dir: ./logs
+  log_interval: 10
+  image_log_interval: 50
+
+distributed:
+  addr: localhost
+  port: "8098"

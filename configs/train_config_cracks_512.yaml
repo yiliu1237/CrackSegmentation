@@ -1,0 +1,51 @@
+# Config matching previous hardcoded train.py behavior
+
+model:
+  backbone: convnext_base
+  pretrained_weights: pretrained_checkpoint/dinov3_convnext_base_pretrain_lvd1689m-801f2ba9.pth
+
+training:
+  image_size: 512
+  epochs: 50
+  batch_size: 32
+  num_workers: 4
+  learning_rate: 1.0e-3
+  min_lr_ratio: 0.002
+  warmup_lr_ratio: 0.01
+  warmup_epochs: 3
+
+datasets:
+  train:
+    - images: datasets/crack_v1_512_512/train/images
+      masks: datasets/crack_v1_512_512/train/masks
+    - images: datasets/crack_v2_CSB_512_512/train/images
+      masks: datasets/crack_v2_CSB_512_512/train/masks
+    - images: datasets/PE_damage_sample_512/train/images
+      masks: datasets/PE_damage_sample_512/train/masks
+    - images: datasets/crack_v3_512_512/train/images
+      masks: datasets/crack_v3_512_512/train/masks
+  val:
+    - images: datasets/crack_v1_512_512/val/images
+      masks: datasets/crack_v1_512_512/val/masks
+      repeat_ratio: 1
+    - images: datasets/PE_damage_sample_512/val/images
+      masks: datasets/PE_damage_sample_512/val/masks
+      repeat_ratio: 1
+    - images: datasets/crack_v3_512_512/val/images
+      masks: datasets/crack_v3_512_512/val/masks
+      repeat_ratio: 1
+
+checkpoint:
+  save_dir: ./checkpoints_stage_1
+  save_interval: 5
+  resume_from: null
+
+logging:
+  log_dir: ./train_log_stage_2
+  log_interval: 10
+  image_log_interval: 50
+
+distributed:
+  addr: localhost
+  port: "8098"
+
