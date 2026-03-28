@@ -14,7 +14,6 @@ outputs/
 runs/
 logs/
 wandb/
-honeycomb_test/
 pretrained_checkpoint/
 checkpoints/
 checkpoints_stage_1/
