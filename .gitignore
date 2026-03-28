@@ -19,3 +19,4 @@ pretrained_checkpoint/
 checkpoints/
 checkpoints_stage_1/
 train_log_stage_2/
+.DS_Store
