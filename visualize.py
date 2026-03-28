@@ -187,7 +187,7 @@ class Trainer(object):
 
         if self.config.save_heatmap:
             cmap = cv2.COLORMAP_TURBO if str(self.config.heatmap_colormap).lower() == "turbo" else cv2.COLORMAP_JET
-            heatmap_u8 = (prob_map * 255.0).astype(np.uint8)
+            heatmap_u8 = ((np.power(prob_map, 2.2)) * 255.0).astype(np.uint8)
             heatmap_bgr = cv2.applyColorMap(heatmap_u8, cmap)
             out_heatmap = os.path.join(self.config.save_result, f"{output_stem}_prob_heatmap.jpg")
             cv2.imwrite(out_heatmap, heatmap_bgr)
