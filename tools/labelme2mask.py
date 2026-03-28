@@ -4,7 +4,7 @@ Labelme 实例标注 -> P 模式 PNG 掩码
 - 输入目录: INPUT_DIR 中的 *.json (labelme 标注)
 - 输出目录: OUTPUT_DIR 中的 *.png (P 模式，索引掩码) 与 *_instances.tsv (索引到实例映射)
 - 一个实例一个颜色；调色盘 256 色（索引 0 = 背景）
-- 识别 shape_type: polygon / rectangle / circle；其余类型跳过
+- 识别 shape_type: polygon / rectangle / circle; 其余类型跳过
 """
 
 import os
