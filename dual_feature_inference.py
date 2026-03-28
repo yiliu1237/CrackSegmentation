@@ -26,15 +26,8 @@ TOOLS_DIR = CURRENT_DIR / "tools"
 if TOOLS_DIR.exists() and str(TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(TOOLS_DIR))
 
-try:
-    from defect_mask_analysis import ConnectedComponentMaskAnalyzer
-except ImportError:
-    from tools.defect_mask_analysis import ConnectedComponentMaskAnalyzer
-
-try:
-    from defect_mask_overlay import create_dual_mask_overlay
-except ImportError:
-    from tools.defect_mask_overlay import create_dual_mask_overlay
+from tools.defect_mask_analysis import ConnectedComponentMaskAnalyzer
+from tools.defect_mask_overlay import create_dual_mask_overlay
 
 cv2.ocl.setUseOpenCL(False)
 cv2.setNumThreads(0)
