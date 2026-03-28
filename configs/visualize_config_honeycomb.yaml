@@ -1,6 +1,6 @@
 dual_inference:
   task: honeycomb_dual_feature
-  images_dir: honeycomb_test
+  images_dir: ./test_images/honeycomb_test
   checkpoint1: output_checkpoints/honeycomb_data1_epoch-20.pth
   checkpoint2: output_checkpoints/honeycomb_data2-epoch-30.pth
   save_result: test_result/honeycomb_dual_feature
